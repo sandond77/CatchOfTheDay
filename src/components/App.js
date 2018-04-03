@@ -14,7 +14,7 @@ class App extends React.Component {
 	addFish = fish => {
 		console.log("adding a fish");
 		const fishes = { ...this.state.fishes };
-		fishes[`fish${Date.now()}`] = fish;
+		fishes[`fish${Date.now()}`] = fish; //pushes a fish to the object with a key of the currenttime
 		this.setState({
 			fishes: fishes
 		});
@@ -27,13 +27,26 @@ class App extends React.Component {
 		});
 	};
 
+	addToOrder = (key) => {
+		const order = {...this.state.order};
+		order[key] = order[key] + 1 || 1; //if order exists, it adds 1; otherwise it creates an order of 1
+		this.setState({order});
+	}
+
 	render() {
 		return (
 			<div className="catch-of-the-day">
 				<div className="menu">
 					<Header tagline="Fresh Seafood Market" />
 					<ul className="fishes">
-						{Object.keys(this.state.fishes).map(key=> <Fish key={key} details={this.state.fishes[key]} />)}
+						{Object.keys(this.state.fishes).map(key=> 
+							<Fish 
+								key={key} 
+								index={key}
+								/* react cannot find the key property, so we need to create this index property with the value of key */ 
+								details={this.state.fishes[key]} 
+								addToOrder = {this.addToOrder}
+							/>)}
 					</ul>
 				</div>
 				<Order />
