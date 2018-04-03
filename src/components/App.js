@@ -55,6 +55,12 @@ class App extends React.Component {
 		this.setState({fishes});
 	} 
 
+	deleteFish = (key) => {
+		const fishes = {...this.state.fishes};
+		fishes[key] = null;
+		this.setState({fishes});
+	}
+
 	loadSampleFishes = () => {
 		console.log("Loading sample fishes");
 		this.setState({
@@ -68,6 +74,12 @@ class App extends React.Component {
 		this.setState({ order });
 	};
 
+	removeFromOrder = key => {
+		const order = { ...this.state.order };
+		delete order[key]
+		this.setState({ order })
+	}
+
 	render() {
 		return (
 			<div className="catch-of-the-day">
@@ -79,17 +91,17 @@ class App extends React.Component {
 								key={key}
 								index={key}
 								/* react cannot find the key property, so we need to create this index property with the value of key */
-
 								details={this.state.fishes[key]}
 								addToOrder={this.addToOrder}
 							/>
 						))}
 					</ul>
 				</div>
-				<Order fishes={this.state.fishes} order={this.state.order} />
+				<Order fishes={this.state.fishes} order={this.state.order} removeFromOrder={this.removeFromOrder}/>
 				<Inventory
 					addFish={this.addFish}
 					updateFish={this.updateFish}
+					deleteFish={this.deleteFish}
 					loadSampleFishes={this.loadSampleFishes}
 					fishes={this.state.fishes}
 				/>
