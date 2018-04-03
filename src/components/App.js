@@ -11,16 +11,32 @@ class App extends React.Component {
 		fishes: {},
 		order: {}
 	};
-	
+
 	//only syncs to firebase after mounting components
-	componentDidMount(){
-		this.ref = base.syncState(`${this.props.match.params.storeId}/fishes`,{
+	componentDidMount() {
+		const { params } = this.props.match;
+		const localStorageRef = localStorage.getItem(params.storeId);
+
+		console.log(localStorageRef)
+		if (localStorageRef) {
+			this.setState({ order: JSON.parse(localStorageRef) });
+		}
+
+		this.ref = base.syncState(`${params.storeId}/fishes`, {
 			context: this,
-			state: 'fishes'
+			state: "fishes"
 		});
 	}
 
-	componentWillUnmount(){
+	componentDidUpdate() {
+		localStorage.setItem(
+			this.props.match.params.storeId,
+			JSON.stringify(this.state.order) 
+		);
+	}
+
+	//disconnects from firebase
+	componentWillUnmount() {
 		base.removeBinding(this.ref);
 	}
 
@@ -40,11 +56,11 @@ class App extends React.Component {
 		});
 	};
 
-	addToOrder = (key) => {
-		const order = {...this.state.order};
+	addToOrder = key => {
+		const order = { ...this.state.order };
 		order[key] = order[key] + 1 || 1; //if order exists, it adds 1; otherwise it creates an order of 1
-		this.setState({order});
-	}
+		this.setState({ order });
+	};
 
 	render() {
 		return (
@@ -52,17 +68,19 @@ class App extends React.Component {
 				<div className="menu">
 					<Header tagline="Fresh Seafood Market" />
 					<ul className="fishes">
-						{Object.keys(this.state.fishes).map(key=> 
-							<Fish 
-								key={key} 
+						{Object.keys(this.state.fishes).map(key => (
+							<Fish
+								key={key}
 								index={key}
-								/* react cannot find the key property, so we need to create this index property with the value of key */ 
-								details={this.state.fishes[key]} 
-								addToOrder = {this.addToOrder}
-							/>)}
+								/* react cannot find the key property, so we need to create this index property with the value of key */
+
+								details={this.state.fishes[key]}
+								addToOrder={this.addToOrder}
+							/>
+						))}
 					</ul>
 				</div>
-				<Order fishes={this.state.fishes} order={this.state.order}/>
+				<Order fishes={this.state.fishes} order={this.state.order} />
 				<Inventory
 					addFish={this.addFish}
 					loadSampleFishes={this.loadSampleFishes}
