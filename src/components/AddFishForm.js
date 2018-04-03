@@ -7,6 +7,7 @@ class AddFishForm extends React.Component {
 	descRef = React.createRef();
 	imageRef = React.createRef();
 
+	////Video uses value.value, but it seems to have depreciated? console log of this.input shows object contains current index
 	createFish = event => {
 		event.preventDefault();
 		const fish = {

@@ -8,7 +8,7 @@ class StorePicker extends React.Component {
     // 1. Stop the form from submitting
     event.preventDefault();
     // 2. get the text from that input
-    const storeName = this.myInput.current.value;
+    const storeName = this.myInput.current.value; //Video uses value.value, but it seems to have depreciated? console log of this.input shows object contains current index
 
     // 3. Change the page to /store/whatever-they-entered
     this.props.history.push(`/store/${storeName}`);
