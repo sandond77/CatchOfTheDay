@@ -4,8 +4,13 @@ import EditFishForm from "./EditFishForm";
 import Login from "./Login";
 
 class Inventory extends React.Component {
+    
+    authenticate = () => {
+        alert("TEST");
+    }
+    
     render() {
-        return <Login />;
+        return <Login authenticate={this.authenticate} />;
         return (
             <div className="inventory">
                 <h2>Inventory</h2>
