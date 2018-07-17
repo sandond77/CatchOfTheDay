@@ -3,7 +3,7 @@ import React from 'react';
 const Login = (props) => (
 	<nav className="Login">
 		<h2>Inventory</h2>
-		<p> Sign in to mange your store's inventory </p>
+		<p> Sign in to manage your store's inventory </p>
 		<button 
 		className="github" 
 		onClick={() => props.authenticate("GitHub")}
