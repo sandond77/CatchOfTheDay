@@ -7,18 +7,21 @@ import base, { firebaseApp } from "../base";
 
 class Inventory extends React.Component {
     
-    authHandler = async authData => {
-        console.log(authData)
-    };
+    // authenticate = (provider) => {
+    //     const authProvider = new firebase.auth[`${provider}AuthProvider`]();
+    //     firebaseApp
+    //         .auth()
+    //         .signInWithPopup(authProvider)
+    //         .then(this.authHandler);
+    // };
 
-    authenticate = (provider) => {
-        const authProvider = new firebase.auth[`${provider}AuthProvider`]();
-        firebaseApp
-            .auth()
-            .signInWithPopup(authProvider)
-            .then(this.authHandler);
-    };
+    // authHandler = async authData => {
+    //     console.log(authData)
+    // };
     
+    authenticate = (provider) => {
+        alert(provider)
+    }
     
     render() {
         return <Login authenticate={this.authenticate} />;
