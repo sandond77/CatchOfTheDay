@@ -15,7 +15,7 @@ class Inventory extends React.Component {
             .then(this.authHandler);
     };
 
-    state {
+    state = {
         uid: null,
         owner: null
     }
@@ -41,7 +41,9 @@ class Inventory extends React.Component {
     // }
     
     render() {
-        return <Login authenticate={this.authenticate} />;
+        if (!this.state.uid){
+            return <Login authenticate={this.authenticate} />;
+        }
         return (
             <div className="inventory">
                 <h2>Inventory</h2>
