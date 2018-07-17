@@ -6,7 +6,7 @@ const Login = (props) => (
 		<p> Sign in to manage your store's inventory </p>
 		<button 
 		className="github" 
-		onClick={() => props.authenticate("GitHub")}
+		onClick={() => props.authenticate("Github")}
 		>
 			Log In with Github
 		</button>
