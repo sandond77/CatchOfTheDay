@@ -15,7 +15,24 @@ class Inventory extends React.Component {
             .then(this.authHandler);
     };
 
+    state {
+        uid: null,
+        owner: null
+    }
+
     authHandler = async (authData) => {
+        const store = await base.fetch(this.props.storeId, {contest:this})
+        if (!store.owner) {
+            await base.post(`${this.props.storeId}/owner`), {
+                data: authData.user.uid
+            }
+        }
+
+        this.setState({
+            uid: authData.user.uid,
+            owner: store.owner || authData.user.uid
+        })
+
         console.log(authData)
     };
     
