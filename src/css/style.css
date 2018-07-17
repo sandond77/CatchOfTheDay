@@ -651,3 +651,13 @@ input[type=submit].twitter:after {
   text-align: center;
   font-size: 3rem;
 }
+
+
+button.google,
+input[type=submit].google {
+  background: #000;
+}
+button.google:after,
+input[type=submit].google:after {
+  background: gray;
+}

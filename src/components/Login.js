@@ -22,6 +22,12 @@ const Login = (props) => (
 		>
 			Log In with Facebook
 		</button>
+		<button 
+		className="facebook google" 
+		onClick={() => props.authenticate("Google")}
+		>
+			Log In with Google
+		</button>
 	</nav>
 ) 
 
